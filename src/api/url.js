@@ -1,24 +1,47 @@
 export default {
-    baseUrl: 'http://192.168.1.192:8888/knowledgebase',
-    selectKContent: '/k-content/selectKContent',//查询知识库内容
-    insertKContent: '/k-content/insertKContent',//添加知识库内容
-    updateKContent: '/k-content/updateKContent',//更新知识库内容
-    selectKContentById: '/k-content/selectKContentById',//根据id查询知识库内容
+    baseUrl: 'http://192.168.1.121:8800/kjgzdt',
+    getModules: '/module/getModules',//获取模块列表
+    addModule: '/module/addModule',//添加模块
+    updateModule: '/module/updateModule',//修改模块
+    getModuleById: '/module/getModuleById',//根据id获取模块
+    delModuleById: '/module/delModuleById',//根据id删除模块
+    getModulesByPage: '/module/getModulesByPage',//查询模块列表分页
+    // 工具栏
+    getToolbarByUserid: '/toolbar/getToolbarByUserid',//根据用户名 查询工具栏列表
+    addToolbar: '/toolbar/addToolbar',//添加工具栏
+    updateToolbar: '/toolbar/updateToolbar',//修改工具栏
+    delToolbarByid: '/toolbar/delToolbarByid',//根据id 删除工具栏
+    toolbaraddModule: '/toolbar/addModule',//工具栏分配模块
+    getToolbarByid: '/toolbar/getToolbarByid',//根据id 查看工具栏详情
 
-    // 
-    selectKType: '/k-type/selectKType',//查询知识库类型
-    selectKTypeById: '/k-type/selectKTypeById',//根据id查询知识库类型
-    // 
-    register: '/user/register',//用户注册
-    login: '/user/login',//用户登录
-    selectUserByUserId: '/user/selectUserByUserId',//根据userid查询用户信息
-    //    
-    deleteKContent: '/admin/deleteKContent',//删除知识库内容
-    updateKType:'/admin/updateKType',//更新知识库类型
-    insertKType:'/admin/insertKType',//添加知识库类型
-    deleteKType:'/admin/deleteKType',//删除知识库类型
-    selectUser:'/admin/selectUser',//查询用户信息
-    deleteUser:'/admin/deleteUser',//删除用户
-    updateUser:'/admin/updateUser',//更新用户信息
+    // 工具栏子菜单
+    addToolbarSubmenu: '/toolbarSubmenu/addToolbarSubmenu',//新增工具栏子菜单
+    delToolbarSubmenuByid: '/toolbarSubmenu/delToolbarSubmenuByid',//根据id 删除工具栏子菜单
+    updateToolbarSubmenu: '/toolbarSubmenu/updateToolbarSubmenu',//修改工具栏子菜单
+    getToolbarSubmenuById: '/toolbarSubmenu/getToolbarSubmenuById',//根据id 查询工具栏子菜单
+
+    // 导航栏
+    getNavigationalbars: '/navigationalbar/getNavigationalbars',//获取导航栏列表
+    addNavigationalbar: '/navigationalbar/addNavigationalbar',//新增导航栏
+    updateNavigationalbar: '/navigationalbar/updateNavigationalbar',//修改导航栏
+    delNavigationalbarByid: '/navigationalbar/delNavigationalbarByid',//根据id 删除导航栏
+    // 导航栏子菜单
+    addNavigationalbarSubmenu: '/navigationalbarSubmenu/addNavigationalbarSubmenu',//新增导航栏菜单项
+    delNavigationalbarSubmenuById: '/navigationalbarSubmenu/delNavigationalbarSubmenuById',//根据id 删除导航栏菜单项
+    updateNavigationalbarSubmenu: '/navigationalbarSubmenu/updateNavigationalbarSubmenu',//修改导航栏菜单项
+    navigationalbarSubmenuaddModule: '/navigationalbarSubmenu/addModule',//导航栏菜单项分配模块
+    // 子菜单项
+    addSubmenuItems: '/SubmenuItems/addSubmenuItems',//新增子菜单项
+    delSubmenuItemsById: '/SubmenuItems/delSubmenuItemsById',//根据id 删除子菜单项
+    // 表信息
+    getTableInformationByTableName: '/tableinformation/getTableInformationByTableName',//获取表信息根据表名
+    // 属性显示图层
+    selectPropertyShowLayers:'/property-show-layer/selectPropertyShowLayers',//查询全部属性显示图层,或以layerName进行模糊查询
+    insertPropertyShowLayer:'/property-show-layer/insertPropertyShowLayer',//添加属性显示图层
+    deletePropertyShowLayer:'/property-show-layer/deletePropertyShowLayer',//删除属性显示图层
+
+    // 属性显示图层字段
+    updatePropertyShowLayerField: '/property-show-layer-field/updatePropertyShowLayerField',//修改属性显示图层字段
+    insertPropertyShowLayerField:'/property-show-layer-field/insertPropertyShowLayerField',//添加属性显示图层字段
 
 }

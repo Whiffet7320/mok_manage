@@ -144,122 +144,282 @@ myGet.interceptors.response.use(response => {
 })
 
 export default {
-    selectKContent(obj, keyword, pageNum, pageSize) {
+    // selectKContent(obj, keyword, pageNum, pageSize) {
+    //     return myPost({
+    //         url: urls.selectKContent,
+    //         data: {
+    //             ...obj
+    //         },
+    //         params: {
+    //             keyword,
+    //             pageNum,
+    //             pageSize
+    //         }
+    //     })
+    // },
+    // selectKContentById(id) {
+    //     return myGet({
+    //         url: urls.selectKContentById,
+    //         params: {
+    //             id
+    //         },
+    //     })
+    // },
+    // deleteKContent(id) {
+    //     return myDelete({
+    //         url: `${urls.baseUrl}${urls.deleteKContent}/${id}`,
+    //     })
+    // },
+    getModules() {
+        return myGet({
+            url: urls.getModules,
+        })
+    },
+    addModule(obj) {
         return myPost({
-            url: urls.selectKContent,
+            url: urls.addModule,
             data: {
                 ...obj
             },
+        })
+    },
+    updateModule(obj) {
+        return myPost({
+            url: urls.updateModule,
+            data: {
+                ...obj
+            },
+        })
+    },
+    getModuleById(id) {
+        return myGet({
+            url: urls.getModuleById,
             params: {
-                keyword,
-                pageNum,
-                pageSize
+                id
             }
         })
     },
-    insertKContent(obj) {
-        return myPost({
-            url: urls.insertKContent,
-            data: {
-                ...obj
-            },
-        })
-    },
-    updateKContent(obj) {
-        return myPost({
-            url: urls.updateKContent,
-            data: {
-                ...obj
-            },
-        })
-    },
-    selectKContentById(id) {
-        return myGet({
-            url: urls.selectKContentById,
-            params: {
-                id
-            },
-        })
-    },
-    deleteKContent(id) {
+    delModuleById(id) {
         return myDelete({
-            url: `${urls.baseUrl}${urls.deleteKContent}/${id}`,
-        })
-    },
-    selectKType() {
-        return myGet({
-            url: urls.selectKType,
-        })
-    },
-    insertKType(obj) {
-        return myPost({
-            url: urls.insertKType,
-            data: {
-                ...obj
-            },
-        })
-    },
-    selectKTypeById(id) {
-        return myGet({
-            url: urls.selectKTypeById,
+            url: urls.delModuleById,
             params: {
                 id
-            },
+            }
         })
     },
-    register(obj) {
+    getModulesByPage(obj) {
         return myPost({
-            url: urls.register,
+            url: urls.getModulesByPage,
             data: {
                 ...obj
             },
         })
     },
-    login(obj) {
+    getToolbarByUserid(userid) {
         return myGet({
-            url: urls.login,
-            params: {
-                ...obj
-            },
-        })
-    },
-    selectUserByUserId(userid) {
-        return myGet({
-            url: urls.selectUserByUserId,
+            url: urls.getToolbarByUserid,
             params: {
                 userid
-            },
+            }
         })
     },
-    updateKType(obj) {
+    addToolbar(obj) {
         return myPost({
-            url: urls.updateKType,
+            url: urls.addToolbar,
             data: {
                 ...obj
             },
         })
     },
-    deleteKType(id) {
-        return myDelete({
-            url: `${urls.baseUrl}${urls.deleteKType}/${id}`,
+    updateToolbar(obj) {
+        return myPost({
+            url: urls.updateToolbar,
+            data: {
+                ...obj
+            },
         })
     },
-    selectUser() {
+    delToolbarByid(id) {
+        return myDelete({
+            url: urls.delToolbarByid,
+            params: {
+                id
+            }
+        })
+    },
+    addToolbarSubmenu(obj) {
+        return myPost({
+            url: urls.addToolbarSubmenu,
+            data: {
+                ...obj
+            },
+        })
+    },
+    delToolbarSubmenuByid(id) {
+        return myDelete({
+            url: urls.delToolbarSubmenuByid,
+            params: {
+                id
+            }
+        })
+    },
+    updateToolbarSubmenu(obj) {
+        return myDelete({
+            url: urls.updateToolbarSubmenu,
+            data: {
+                ...obj
+            }
+        })
+    },
+    getNavigationalbars(userid) {
         return myGet({
-            url: urls.selectUser,
+            url: urls.getNavigationalbars,
+            params: {
+                userid
+            }
         })
     },
-    deleteUser(id) {
-        return myDelete({
-            url: `${urls.baseUrl}${urls.deleteUser}/${id}`,
-        })
-    },
-    updateUser(obj) {
+    addNavigationalbar(obj) {
         return myPost({
-            url: urls.updateUser,
+            url: urls.addNavigationalbar,
             data: {
                 ...obj
             },
         })
-    }
+    },
+    updateNavigationalbar(obj) {
+        return myPost({
+            url: urls.updateNavigationalbar,
+            data: {
+                ...obj
+            },
+        })
+    },
+    delNavigationalbarByid(id) {
+        return myDelete({
+            url: urls.delNavigationalbarByid,
+            params: {
+                id
+            }
+        })
+    },
+    addNavigationalbarSubmenu(obj) {
+        return myPost({
+            url: urls.addNavigationalbarSubmenu,
+            data: {
+                ...obj
+            },
+        })
+    },
+    delNavigationalbarSubmenuById(id) {
+        return myDelete({
+            url: urls.delNavigationalbarSubmenuById,
+            params: {
+                id
+            }
+        })
+    },
+    updateNavigationalbarSubmenu(obj){
+        return myPost({
+            url: urls.updateNavigationalbarSubmenu,
+            data: {
+                ...obj
+            },
+        })
+    },
+    navigationalbarSubmenuaddModule(ModuleId,navigationalbarSubmenuId){
+        return myPost({
+            url: urls.navigationalbarSubmenuaddModule,
+            params: {
+                ModuleId,
+                navigationalbarSubmenuId,
+            },
+        })
+    },
+    toolbaraddModule(moduleId,toolbarId){
+        return myPost({
+            url: urls.toolbaraddModule,
+            params: {
+                moduleId,
+                toolbarId,
+            },
+        })
+    },
+    getToolbarByid(id){
+        return myGet({
+            url: urls.getToolbarByid,
+            params: {
+                id
+            }
+        })
+    },
+    getToolbarSubmenuById(id){
+        return myGet({
+            url: urls.getToolbarSubmenuById,
+            params: {
+                id
+            }
+        })
+    },
+    addSubmenuItems(obj){
+        return myPost({
+            url: urls.addSubmenuItems,
+            data: {
+                ...obj
+            },
+        })
+    },
+    delSubmenuItemsById(id){
+        return myDelete({
+            url: urls.delSubmenuItemsById,
+            params: {
+                id
+            }
+        })
+    },
+    getTableInformationByTableName(tablename){
+        return myGet({
+            url: urls.getTableInformationByTableName,
+            params: {
+                tablename
+            }
+        })
+    },
+    updatePropertyShowLayerField(obj){
+        return myPost({
+            url: urls.updatePropertyShowLayerField,
+            data: {
+                ...obj
+            },
+        })
+    },
+    insertPropertyShowLayerField(obj){
+        return myPost({
+            url: urls.insertPropertyShowLayerField,
+            data: {
+                ...obj
+            },
+        })
+    },
+    selectPropertyShowLayers(layerName){
+        return myGet({
+            url: urls.selectPropertyShowLayers,
+            params: {
+                layerName
+            }
+        })
+    },
+    insertPropertyShowLayer(obj){
+        return myPost({
+            url: urls.insertPropertyShowLayer,
+            data: {
+                ...obj
+            },
+        }) 
+    },
+    deletePropertyShowLayer(id){
+        return myDelete({
+            url: `${urls.deletePropertyShowLayer}/${id}`,
+        })
+    },
 }

@@ -22,11 +22,11 @@ import Aside from "../Aside";
 export default {
   data() {
     return {
-      isLogin: false,
+      isLogin: 'true',
     };
   },
-  created(){
-      this.isLogin = sessionStorage.getItem("isLogin");
+  created() {
+    // this.isLogin = sessionStorage.getItem("isLogin");
   },
   components: {
     Login,
@@ -54,5 +54,8 @@ export default {
 .el-main {
   background-color: #e9eef3;
   color: #333;
+}
+.el-aside{
+  background-color: #545c64 !important;
 }
 </style>

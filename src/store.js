@@ -5,40 +5,28 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    editKContentByIdObj:null,//修改知识库的obj
-    selectKContentByIdObj:{},//知识库详情的obj
-    pageSize:10,
-    page:1,
-    treeForTypeId:null,//根据树形组件来筛选table
-    personalPageSize:10,
-    personalPage:1,
-    userObj:{}
+    pageSize: 10,
+    page: 1,
+    AttributeDisplayLayerObj: null,
+    AttributeDisplayLayerPageSize: 10,
+    AttributeDisplayLayerPage: 1,
   },
   mutations: {
-    editKContentByIdObj(state, str){
-      state.editKContentByIdObj = str;
-    },
-    selectKContentByIdObj(state, str){
-      state.selectKContentByIdObj = str;
-    },
-    pageSize(state, str){
+    pageSize(state, str) {
       state.pageSize = str;
     },
-    page(state, str){
+    page(state, str) {
       state.page = str;
     },
-    treeForTypeId(state, str){
-      state.treeForTypeId = str;
+    AttributeDisplayLayerObj(state, str) {
+      state.AttributeDisplayLayerObj = str;
     },
-    personalPageSize(state, str){
-      state.personalPageSize = str;
+    AttributeDisplayLayerPageSize(state, str) {
+      state.AttributeDisplayLayerPageSize = str;
     },
-    personalPage(state, str){
-      state.personalPage = str;
+    AttributeDisplayLayerPage(state, str) {
+      state.AttributeDisplayLayerPage = str;
     },
-    userObj(state, str){
-      state.userObj = str;
-    }
   },
   actions: {
 

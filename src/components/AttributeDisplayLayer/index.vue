@@ -1,5 +1,5 @@
 <template>
-  <div class="PersonalCenter">
+  <div class="AttributeDisplayLayer">
     <RouterView />
     <!-- <Test/> -->
   </div>

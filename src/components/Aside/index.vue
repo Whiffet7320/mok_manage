@@ -1,54 +1,78 @@
 <template>
-  <el-tree
-    :data="data"
-    :props="defaultProps"
-    @node-click="handleNodeClick"
-  ></el-tree>
+  <div class="aside">
+    <el-row>
+      <el-col :span="24">
+        <el-menu
+          :default-active="default_active"
+          class="el-menu-vertical-demo"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          :router="true"
+        >
+          <el-menu-item index="1" :route="{ name: 'HomeMain' }">
+            <i class="el-icon-menu"></i>
+            <span slot="title">模块管理</span>
+          </el-menu-item>
+          <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>工具栏管理</span>
+            </template>
+            <el-menu-item index="2-1" :route="{ name: 'ToolbarMain' }"
+              >菜单管理</el-menu-item
+            >
+          </el-submenu>
+          <el-submenu index="3">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>导航栏管理</span>
+            </template>
+            <el-menu-item index="3-1" :route="{ name: 'NavbarMain' }"
+              >菜单管理</el-menu-item
+            >
+            <!-- <el-menu-item index="3-2">子菜单管理</el-menu-item> -->
+          </el-submenu>
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>属性显示图层</span>
+            </template>
+            <el-menu-item index="4-1" :route="{ name: 'AttributeDisplayLayerMain' }"
+              >图层管理</el-menu-item
+            >
+            <!-- <el-menu-item index="3-2">子菜单管理</el-menu-item> -->
+          </el-submenu>
+        </el-menu>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
-  computed: {
-    ...mapState(["page", "pageSize"]),
-  },
   data() {
     return {
-      data: [],
-      defaultProps: {
-        children: "children",
-        label: "label",
-      },
-      typeId: null,
+      default_active: null,
     };
   },
-  created() {
-    this.selectKType();
-  },
-  methods: {
-    handleNodeClick(data) {
-      if (this.$route.path != "/") {
-        this.$router.push({ name: "home" });
+  watch: {
+    $route(to, from) {
+      console.log(from.path); //从哪来
+      console.log(to.path); //到哪去
+      if (to.path == "/") {
+        this.default_active = "1";
+      } else if (to.path == "/toolbar/") {
+        this.default_active = "2-1";
+      } else if (to.path == "/navbar/") {
+        this.default_active = "3-1";
+      }else if (to.path == "/attributeDisplayLayer/") {
+        this.default_active = "4-1";
       }
-      // 根据分类查
-      this.$store.commit("treeForTypeId", data.id);
-    },
-    async selectKType() {
-      const res = await this.$api.selectKType();
-      console.log(res);
-      const newOp = [...res.data];
-      newOp.forEach((ele) => {
-        ele.label = ele.typename;
-        ele.value = ele.id;
-        ele.children = ele.type;
-        ele.type.forEach((item) => {
-          item.label = item.typename;
-          item.value = item.id;
-        });
-      });
-      console.log(newOp);
-      this.data = newOp;
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+</style>

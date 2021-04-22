@@ -9,36 +9,61 @@ const routes = [
     {
         path: '/',
         name: 'home',
-        component: () => import('./components/Home')
-    },
-    {
-        path: '/PersonalCenter',
-        name: 'PersonalCenter',
-        component: () => import('./components/PersonalCenter'),
-        children:[
+        component: () => import('./components/Home'),
+        children: [
             {
                 path: '',
-                name: 'PersonalCenter',
-                component: () => import('./components/PersonalCenter/main.vue'),
+                name: 'HomeMain',
+                component: () => import('./components/Home/main.vue'),
             },
             {
-                path: 'AddKnowledge',
-                name: 'AddKnowledge',
-                component: () => import('./components/AddKnowledge'),
-            },
-            {
-                path: 'SeeContent',
-                name: 'SeeContent',
-                component: () => import('./components/SeeContent')
+                path: 'details',
+                name: 'details',
+                component: () => import('./components/Home/details.vue'),
             },
         ]
     },
-
-    // {
-    //     path: '/login',
-    //     name: 'login',
-    //     component: () => import('./components/Login')
-    // },
+    {
+        path: '/toolbar',
+        name: 'toolbar',
+        component: () => import('./components/Toolbar'),
+        children: [
+            {
+                path: '',
+                name: 'ToolbarMain',
+                component: () => import('./components/Toolbar/main.vue'),
+            },
+        ]
+    },
+    {
+        path: '/navbar',
+        name: 'navbar',
+        component: () => import('./components/Navbar'),
+        children: [
+            {
+                path: '',
+                name: 'NavbarMain',
+                component: () => import('./components/Navbar/main.vue'),
+            },
+        ]
+    },
+    {
+        path: '/attributeDisplayLayer',
+        name: 'AttributeDisplayLayer',
+        component: () => import('./components/AttributeDisplayLayer'),
+        children: [
+            {
+                path: '',
+                name: 'AttributeDisplayLayerMain',
+                component: () => import('./components/AttributeDisplayLayer/main.vue'),
+            },
+            {
+                path: 'AttributeDisplayLayerDetails',
+                name: 'AttributeDisplayLayerDetails',
+                component: () => import('./components/AttributeDisplayLayer/details.vue'),
+            },
+        ]
+    },
 ]
 
 const router = new VueRouter({
