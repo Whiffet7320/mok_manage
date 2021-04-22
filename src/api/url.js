@@ -39,7 +39,7 @@ export default {
     selectPropertyShowLayers:'/property-show-layer/selectPropertyShowLayers',//查询全部属性显示图层,或以layerName进行模糊查询
     insertPropertyShowLayer:'/property-show-layer/insertPropertyShowLayer',//添加属性显示图层
     deletePropertyShowLayer:'/property-show-layer/deletePropertyShowLayer',//删除属性显示图层
-
+    selectPropertyShowLayer:'/property-show-layer/selectPropertyShowLayer',//分页查询全部属性显示图层,或以layerName进行模糊查询
     // 属性显示图层字段
     updatePropertyShowLayerField: '/property-show-layer-field/updatePropertyShowLayerField',//修改属性显示图层字段
     insertPropertyShowLayerField:'/property-show-layer-field/insertPropertyShowLayerField',//添加属性显示图层字段

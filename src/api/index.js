@@ -422,4 +422,13 @@ export default {
             url: `${urls.deletePropertyShowLayer}/${id}`,
         })
     },
+    selectPropertyShowLayer(pageNum,pageSize){
+        return myGet({
+            url: urls.selectPropertyShowLayer,
+            params: {
+                pageNum,
+                pageSize
+            }
+        })
+    }
 }

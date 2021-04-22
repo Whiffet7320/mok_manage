@@ -44,7 +44,7 @@
     <el-pagination
       @size-change="this.handleSizeChange"
       @current-change="this.handleCurrentChange"
-      :current-page="this.page"
+      :current-page="this.AttributeDisplayLayerPage"
       :page-sizes="[10, 15, 20, 50]"
       :page-size="10"
       layout="total, sizes, prev, pager, next, jumper"
@@ -91,7 +91,7 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState(["page", "pageSize"]),
+    ...mapState(["AttributeDisplayLayerPageSize", "AttributeDisplayLayerPage"]),
   },
   data() {
     return {
@@ -110,6 +110,7 @@ export default {
           { required: true, message: "请输入图层名称", trigger: "blur" },
         ],
       },
+      total: 0,
     };
   },
   created() {
@@ -119,7 +120,9 @@ export default {
     async getData() {
       const res = await this.$api.selectPropertyShowLayers();
       console.log(res);
+      this.total = res.data.length;
       this.tableData = res.data;
+      this.getModulesByPage();
     },
     // 添加
     onAdd() {
@@ -161,14 +164,31 @@ export default {
     // 分页
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
-      this.$store.commit("pageSize", val);
+      this.$store.commit("AttributeDisplayLayerPageSize", val);
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
-      this.$store.commit("page", val);
+      this.$store.commit("AttributeDisplayLayerPage", val);
+    },
+    async getModulesByPage() {
+      const res = await this.$api.selectPropertyShowLayer(
+        this.AttributeDisplayLayerPage,
+        this.AttributeDisplayLayerPageSize,
+      );
+      console.log(res)
     },
     addHandleClose() {
       this.addDialogVisible = false;
+    },
+  },
+  watch: {
+    AttributeDisplayLayerPage: function (page) {
+      this.$store.commit("AttributeDisplayLayerPage", page);
+      this.getModulesByPage();
+    },
+    AttributeDisplayLayerPageSize: function (pageSize) {
+      this.$store.commit("AttributeDisplayLayerPageSize", pageSize);
+      this.getModulesByPage();
     },
   },
 };
