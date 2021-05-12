@@ -6,17 +6,17 @@ const vue = new Vue()
 let myPost = axios.create({
     baseURL: urls.baseUrl,
     method: 'post',
-    timeout: 1000,
+    timeout: 2000,
 })
 let myGet = axios.create({
     baseURL: urls.baseUrl,
     method: 'get',
-    timeout: 1000,
+    timeout: 2000,
 })
 let myDelete = axios.create({
     baseURL: urls.baseUrl,
     method: 'delete',
-    timeout: 1000,
+    timeout: 2000,
 })
 
 myDelete.interceptors.request.use(config => {
@@ -319,7 +319,7 @@ export default {
             }
         })
     },
-    updateNavigationalbarSubmenu(obj){
+    updateNavigationalbarSubmenu(obj) {
         return myPost({
             url: urls.updateNavigationalbarSubmenu,
             data: {
@@ -327,7 +327,7 @@ export default {
             },
         })
     },
-    navigationalbarSubmenuaddModule(ModuleId,navigationalbarSubmenuId){
+    navigationalbarSubmenuaddModule(ModuleId, navigationalbarSubmenuId) {
         return myPost({
             url: urls.navigationalbarSubmenuaddModule,
             params: {
@@ -336,7 +336,7 @@ export default {
             },
         })
     },
-    toolbaraddModule(moduleId,toolbarId){
+    toolbaraddModule(moduleId, toolbarId) {
         return myPost({
             url: urls.toolbaraddModule,
             params: {
@@ -345,7 +345,7 @@ export default {
             },
         })
     },
-    getToolbarByid(id){
+    getToolbarByid(id) {
         return myGet({
             url: urls.getToolbarByid,
             params: {
@@ -353,7 +353,7 @@ export default {
             }
         })
     },
-    getToolbarSubmenuById(id){
+    getToolbarSubmenuById(id) {
         return myGet({
             url: urls.getToolbarSubmenuById,
             params: {
@@ -361,7 +361,7 @@ export default {
             }
         })
     },
-    addSubmenuItems(obj){
+    addSubmenuItems(obj) {
         return myPost({
             url: urls.addSubmenuItems,
             data: {
@@ -369,7 +369,7 @@ export default {
             },
         })
     },
-    delSubmenuItemsById(id){
+    delSubmenuItemsById(id) {
         return myDelete({
             url: urls.delSubmenuItemsById,
             params: {
@@ -377,7 +377,7 @@ export default {
             }
         })
     },
-    getTableInformationByTableName(tablename){
+    getTableInformationByTableName(tablename) {
         return myGet({
             url: urls.getTableInformationByTableName,
             params: {
@@ -385,7 +385,7 @@ export default {
             }
         })
     },
-    updatePropertyShowLayerField(obj){
+    updatePropertyShowLayerField(obj) {
         return myPost({
             url: urls.updatePropertyShowLayerField,
             data: {
@@ -393,7 +393,7 @@ export default {
             },
         })
     },
-    insertPropertyShowLayerField(obj){
+    insertPropertyShowLayerField(obj) {
         return myPost({
             url: urls.insertPropertyShowLayerField,
             data: {
@@ -401,7 +401,7 @@ export default {
             },
         })
     },
-    selectPropertyShowLayers(layerName){
+    selectPropertyShowLayers(layerName) {
         return myGet({
             url: urls.selectPropertyShowLayers,
             params: {
@@ -409,26 +409,126 @@ export default {
             }
         })
     },
-    insertPropertyShowLayer(obj){
+    insertPropertyShowLayer(obj) {
         return myPost({
             url: urls.insertPropertyShowLayer,
             data: {
                 ...obj
             },
-        }) 
+        })
     },
-    deletePropertyShowLayer(id){
+    deletePropertyShowLayer(id) {
         return myDelete({
             url: `${urls.deletePropertyShowLayer}/${id}`,
         })
     },
-    selectPropertyShowLayer(pageNum,pageSize){
+    selectPropertyShowLayer(pageNum, pageSize) {
         return myGet({
             url: urls.selectPropertyShowLayer,
             params: {
                 pageNum,
                 pageSize
             }
+        })
+    },
+    selectStatisticalAnalysisLayers(layerName) {
+        return myGet({
+            url: urls.selectStatisticalAnalysisLayers,
+            params: {
+                layerName
+            }
+        })
+    },
+    selectStatisticalAnalysisLayer(pageNum, pageSize) {
+        return myGet({
+            url: urls.selectStatisticalAnalysisLayer,
+            params: {
+                pageNum,
+                pageSize
+            }
+        })
+    },
+    insertStatisticalAnalysisLayer(obj) {
+        return myPost({
+            url: urls.insertStatisticalAnalysisLayer,
+            data: {
+                ...obj
+            },
+        })
+    },
+    deleteStatisticalAnalysisLayer(id) {
+        return myDelete({
+            url: `${urls.deleteStatisticalAnalysisLayer}/${id}`,
+        })
+    },
+    insertStatisticalAnalysisLayerField(obj) {
+        return myPost({
+            url: urls.insertStatisticalAnalysisLayerField,
+            data: {
+                ...obj
+            },
+        })
+    },
+    updateStatisticalAnalysisLayerField(obj) {
+        return myPost({
+            url: urls.updateStatisticalAnalysisLayerField,
+            data: {
+                ...obj
+            },
+        })
+    },
+    selectConflictAnalysisLayers() {
+        return myGet({
+            url: urls.selectConflictAnalysisLayers,
+        })
+    },
+    selectConflictAnalysisLayer(pageNum, pageSize) {
+        return myGet({
+            url: urls.selectConflictAnalysisLayer,
+            params: {
+                pageNum,
+                pageSize
+            }
+        })
+    },
+    insertConflictAnalysisLayer(obj) {
+        return myPost({
+            url: urls.insertConflictAnalysisLayer,
+            data: {
+                ...obj
+            },
+        })
+    },
+    deleteConflictAnalysisLayer(id) {
+        return myDelete({
+            url: `${urls.deleteConflictAnalysisLayer}/${id}`,
+        })
+    },
+    delModule(ModuleId, navigationalbarSubmenuId) {
+        return myPost({
+            url: urls.delModule,
+            params: {
+                ModuleId,
+                navigationalbarSubmenuId,
+            },
+        })
+    },
+    toolbarDelModule(moduleId, toolbarId) {
+        return myPost({
+            url: urls.toolbarDelModule,
+            params: {
+                moduleId,
+                toolbarId,
+            },
+        })
+    },
+    delSubmenuItem(moduleId, submenuId) {
+        return myPost({
+            url: urls.delSubmenuItem,
+            params: {
+                moduleId,
+                submenuId,
+            },
         })
     }
 }

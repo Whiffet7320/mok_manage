@@ -1,6 +1,6 @@
 <template>
   <div class="detail">
-    <p>添加显示图层</p>
+    <p>添加统计分析图层</p>
     <el-form
       :model="ruleForm"
       :rules="rules"
@@ -10,7 +10,7 @@
     >
       <el-form-item label="区域表" prop="region">
         <el-select
-          v-if="!this.AttributeDisplayLayerObj"
+          v-if="!this.StatisticalAnalysisLayerObj"
           v-model="ruleForm.region"
           @change="changeClick"
           placeholder="请选择活动区域"
@@ -27,13 +27,12 @@
         <el-input
           v-else
           :disabled="true"
-          v-model="this.AttributeDisplayLayerObj.layerName"
+          v-model="this.StatisticalAnalysisLayerObj.layerName"
         ></el-input>
       </el-form-item>
       <el-form-item label="表" prop="tableData">
         <el-table :data="ruleForm.tableData" style="width: 100%">
           <el-table-column prop="name" label="字段名称"> </el-table-column>
-          <el-table-column prop="type" label="字段类型"> </el-table-column>
           <el-table-column prop="remarks" label="别名（对应注释）">
             <template scope="scope">
               <div class="input-box">
@@ -43,14 +42,6 @@
                   @keyup.enter.native="editEnter(scope.row)"
                 ></el-input>
               </div>
-            </template>
-          </el-table-column>
-          <el-table-column label="是否展示">
-            <template slot-scope="scope">
-              <el-checkbox
-                v-model="scope.row.mycheck"
-                @change="check(scope.row)"
-              ></el-checkbox>
             </template>
           </el-table-column>
         </el-table>
@@ -68,7 +59,7 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState(["AttributeDisplayLayerObj"]),
+    ...mapState(["StatisticalAnalysisLayerObj"]),
   },
   data() {
     return {
@@ -86,15 +77,14 @@ export default {
     };
   },
   async created() {
-    if (this.AttributeDisplayLayerObj) {
+    if (this.StatisticalAnalysisLayerObj) {
       const res = await this.$api.getTableInformationByTableName(
-        this.AttributeDisplayLayerObj.layerId
+        this.StatisticalAnalysisLayerObj.layerid
       );  
       console.log(res);
-      this.getData();
       this.ruleForm.tableData = res.data;
     }
-    console.log(this.AttributeDisplayLayerObj);
+    console.log(this.StatisticalAnalysisLayerObj);
     this.getData();
   },
   methods: {
@@ -105,11 +95,11 @@ export default {
         );
         this.ruleForm.tableData = res2.data;
       }
-      const res = await this.$api.selectPropertyShowLayers(
-        this.AttributeDisplayLayerObj.layerName
+      const res = await this.$api.selectStatisticalAnalysisLayers(
+        this.StatisticalAnalysisLayerObj.layerName
       );
       this.id = res.data[0].id;
-      console.log(res.data[0].PropertyShowLayerField);
+      console.log(res.data[0])
       this.ruleForm.tableData.forEach((ele) => {
         res.data[0].PropertyShowLayerField.forEach((item) => {
           if (ele.name == item.field) {
@@ -137,34 +127,14 @@ export default {
         }
       });
     },
-    async check(row) {
-      console.log(row);
-      const obj = {
-        alias: row.remarks,
-        field: row.name,
-        isShow: row.mycheck,
-        propertyShowLayerId: this.id,
-      };
-      const res = await this.$api.insertPropertyShowLayerField(obj);
-      console.log(res);
-      if (res.code == 200) {
-        this.$message({
-          message: "保存成功",
-          type: "success",
-        });
-        this.getData();
-      } else {
-        this.$message.error("保存失败");
-      }
-    },
     async editEnter(row) {
       console.log(row);
       const obj = {
         alias: row.remarks,
         field: row.name,
-        propertyShowLayerId: this.id,
+        statisticalAnalysisLayerId: this.id,
       };
-      const res = await this.$api.insertPropertyShowLayerField(obj);
+      const res = await this.$api.insertStatisticalAnalysisLayerField(obj);
       console.log(res);
       if (res.code == 200) {
         this.$message({

@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="logo">
-      <span class="title">知识库系统</span>
+      <span class="title">空间工作底图系统</span>
     </div>
   </div>
 </template>

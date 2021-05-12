@@ -64,6 +64,40 @@ const routes = [
             },
         ]
     },
+    {
+        path: '/statisticalAnalysisLayer',
+        name: 'StatisticalAnalysisLayer',
+        component: () => import('./components/StatisticalAnalysisLayer'),
+        children: [
+            {
+                path: '',
+                name: 'StatisticalAnalysisLayerMain',
+                component: () => import('./components/StatisticalAnalysisLayer/main.vue'),
+            },
+            {
+                path: 'StatisticalAnalysisLayerDetails',
+                name: 'StatisticalAnalysisLayerDetails',
+                component: () => import('./components/StatisticalAnalysisLayer/details.vue'),
+            },
+        ]
+    },
+    {
+        path: '/conflictAnalysisLayer',
+        name: 'ConflictAnalysisLayer',
+        component: () => import('./components/ConflictAnalysisLayer'),
+        children: [
+            {
+                path: '',
+                name: 'ConflictAnalysisLayerMain',
+                component: () => import('./components/ConflictAnalysisLayer/main.vue'),
+            },
+            {
+                path: '',
+                name: 'ConflictAnalysisLayerDetails',
+                component: () => import('./components/ConflictAnalysisLayer/details.vue'),
+            }
+        ]
+    },
 ]
 
 const router = new VueRouter({

@@ -36,10 +36,22 @@
           <el-submenu index="4">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>属性显示图层</span>
+              <span>图层管理</span>
             </template>
-            <el-menu-item index="4-1" :route="{ name: 'AttributeDisplayLayerMain' }"
-              >图层管理</el-menu-item
+            <el-menu-item
+              index="4-1"
+              :route="{ name: 'AttributeDisplayLayerMain' }"
+              >属性显示图层</el-menu-item
+            >
+            <el-menu-item
+              index="4-2"
+              :route="{ name: 'StatisticalAnalysisLayerMain' }"
+              >统计分析图层</el-menu-item
+            >
+            <el-menu-item
+              index="4-3"
+              :route="{ name: 'ConflictAnalysisLayerMain' }"
+              >冲突分析图层</el-menu-item
             >
             <!-- <el-menu-item index="3-2">子菜单管理</el-menu-item> -->
           </el-submenu>
@@ -66,8 +78,12 @@ export default {
         this.default_active = "2-1";
       } else if (to.path == "/navbar/") {
         this.default_active = "3-1";
-      }else if (to.path == "/attributeDisplayLayer/") {
+      } else if (to.path == "/attributeDisplayLayer/") {
         this.default_active = "4-1";
+      } else if (to.path == "/statisticalAnalysisLayer/") {
+        this.default_active = "4-2";
+      }else if (to.path == "/conflictAnalysisLayer/") {
+        this.default_active = "4-3";
       }
     },
   },

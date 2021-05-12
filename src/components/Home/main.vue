@@ -36,7 +36,7 @@
       <el-table-column :show-overflow-tooltip="true" fixed prop="icon" label="图标"> </el-table-column>
       <el-table-column :show-overflow-tooltip="true" fixed="right" label="操作" width="240">
         <template slot-scope="scope">
-          <el-button
+          <!-- <el-button
             @click="distributionNav(scope.row)"
             type="text"
             size="small"
@@ -47,7 +47,7 @@
             type="text"
             size="small"
             >分配工具栏</el-button
-          >
+          > -->
           <el-button @click="modify(scope.row)" type="text" size="small"
             >修改</el-button
           >

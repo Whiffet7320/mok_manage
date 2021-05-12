@@ -175,11 +175,34 @@
       :before-close="seeModelHandleClose"
     >
       <el-table :data="seeModeltableData" style="width: 100%">
-        <el-table-column :show-overflow-tooltip="true" fixed prop="id" label="id"> </el-table-column>
-        <el-table-column :show-overflow-tooltip="true" fixed prop="text" label="导航栏名称">
+        <el-table-column
+          :show-overflow-tooltip="true"
+          fixed
+          prop="id"
+          label="id"
+        >
         </el-table-column>
-        <el-table-column :show-overflow-tooltip="true" fixed prop="modular" label="模块"> </el-table-column>
-        <el-table-column :show-overflow-tooltip="true" fixed prop="icon" label="图标"> </el-table-column>
+        <el-table-column
+          :show-overflow-tooltip="true"
+          fixed
+          prop="text"
+          label="导航栏名称"
+        >
+        </el-table-column>
+        <el-table-column
+          :show-overflow-tooltip="true"
+          fixed
+          prop="modular"
+          label="模块"
+        >
+        </el-table-column>
+        <el-table-column
+          :show-overflow-tooltip="true"
+          fixed
+          prop="icon"
+          label="图标"
+        >
+        </el-table-column>
       </el-table>
     </el-dialog>
     <!-- 添加模块 -->
@@ -384,8 +407,9 @@ export default {
       this.addModelDialogVisible = true;
     },
     async check(scope) {
-      //   console.log(scope.row,this.toolbarId);
-      const res = await this.$api.navigationalbarSubmenuaddModule(
+      console.log(scope.row.mycheck, this.toolbarId);
+      if (scope.row.mycheck) {
+        const res = await this.$api.navigationalbarSubmenuaddModule(
           scope.row.id,
           this.toolbarId
         );
@@ -399,6 +423,24 @@ export default {
         } else {
           this.$message.error("保存失败");
         }
+      } else {
+        const res = await this.$api.delModule(
+          scope.row.id,
+          this.toolbarId
+        );
+        console.log(res)
+        if (res.code == 200) {
+          this.$message({
+            message: "保存成功",
+            type: "success",
+          });
+          const index = this.addModelArr.indexOf(scope.row.id)
+          this.addModelArr.splice(index,1);
+          this.getData();
+        } else {
+          this.$message.error("保存失败");
+        }
+      }
     },
     // 查看模块
     seeSubmenuModel(data) {

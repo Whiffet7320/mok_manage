@@ -166,18 +166,50 @@
       :before-close="seeModelHandleClose"
     >
       <el-table :data="seeModeltableData" style="width: 100%">
-        <el-table-column :show-overflow-tooltip="true" fixed prop="id" label="id"> </el-table-column>
-        <el-table-column :show-overflow-tooltip="true" fixed prop="text" label="导航栏名称">
+        <el-table-column
+          :show-overflow-tooltip="true"
+          fixed
+          prop="id"
+          label="id"
+        >
         </el-table-column>
-        <el-table-column :show-overflow-tooltip="true" fixed prop="modular" label="模块"> </el-table-column>
-        <el-table-column :show-overflow-tooltip="true" fixed prop="icon" label="图标"> </el-table-column>
-        <el-table-column :show-overflow-tooltip="true" fixed="right" label="操作" width="100">
+        <el-table-column
+          :show-overflow-tooltip="true"
+          fixed
+          prop="text"
+          label="导航栏名称"
+        >
+        </el-table-column>
+        <el-table-column
+          :show-overflow-tooltip="true"
+          fixed
+          prop="modular"
+          label="模块"
+        >
+        </el-table-column>
+        <el-table-column
+          :show-overflow-tooltip="true"
+          fixed
+          prop="icon"
+          label="图标"
+          width="200"
+        >
+        </el-table-column>
+        <!-- <el-table-column
+          :show-overflow-tooltip="true"
+          fixed="right"
+          label="操作"
+          width="100"
+        >
           <template slot-scope="scope">
-            <el-button @click="deletSeeModel(scope.row)" type="text" size="small"
+            <el-button
+              @click="deletSeeModel(scope.row)"
+              type="text"
+              size="small"
               >删除</el-button
             >
           </template>
-        </el-table-column>
+        </el-table-column> -->
       </el-table>
     </el-dialog>
     <!-- 添加模块 -->
@@ -422,34 +454,71 @@ export default {
     async check(scope) {
       //   console.log(scope.row,this.toolbarId);
       if (this.modelState == "father") {
-        const res = await this.$api.toolbaraddModule(
-          scope.row.id,
-          this.toolbarId
-        );
-        if (res.code == 200) {
-          this.$message({
-            message: "保存成功",
-            type: "success",
-          });
-          this.addModelArr.push(scope.row.id);
-          this.getData();
+        if (scope.row.mycheck) {
+          const res = await this.$api.toolbaraddModule(
+            scope.row.id,
+            this.toolbarId
+          );
+          if (res.code == 200) {
+            this.$message({
+              message: "保存成功",
+              type: "success",
+            });
+            this.addModelArr.push(scope.row.id);
+            this.getData();
+          } else {
+            this.$message.error("保存失败");
+          }
         } else {
-          this.$message.error("保存失败");
+          const res = await this.$api.toolbarDelModule(
+            scope.row.id,
+            this.toolbarId
+          );
+          console.log(res);
+          if (res.code == 200) {
+            this.$message({
+              message: "保存成功",
+              type: "success",
+            });
+            const index = this.addModelArr.indexOf(scope.row.id);
+            this.addModelArr.splice(index, 1);
+            this.getData();
+          } else {
+            this.$message.error("保存失败");
+          }
         }
       } else if (this.modelState == "son") {
-        const res = await this.$api.addSubmenuItems({
-          moduleId: scope.row.id,
-          submenuId: this.toolbarId,
-        });
-        if (res.code == 200) {
-          this.$message({
-            message: "保存成功",
-            type: "success",
+        if (scope.row.mycheck) {
+          const res = await this.$api.addSubmenuItems({
+            moduleId: scope.row.id,
+            submenuId: this.toolbarId,
           });
-          this.addModelArr.push(scope.row.id);
-          this.getData();
+          if (res.code == 200) {
+            this.$message({
+              message: "保存成功",
+              type: "success",
+            });
+            this.addModelArr.push(scope.row.id);
+            this.getData();
+          } else {
+            this.$message.error("保存失败");
+          }
         } else {
-          this.$message.error("保存失败");
+          const res = await this.$api.delSubmenuItem(
+            scope.row.id,
+            this.toolbarId
+          );
+          if (res.code == 200) {
+            this.$message({
+              message: "保存成功",
+              type: "success",
+            });
+            const index = this.addModelArr.indexOf(scope.row.id);
+            this.addModelArr.splice(index, 1);
+            this.getData();
+          } else {
+            this.$message.error("保存失败");
+          }
         }
       }
     },
@@ -469,11 +538,11 @@ export default {
       }
     },
     // 查看模块删除
-    async deletSeeModel(row){
-        console.log(row)
-        // const res = await this.$api.delSubmenuItemsById(row.id)
-        // console.log(res)
-        // this.getData();
+    async deletSeeModel(row) {
+      console.log(row);
+      // const res = await this.$api.delSubmenuItemsById(row.id)
+      // console.log(res)
+      // this.getData();
     },
     // 添加子菜单
     async addSubmenu(data) {
